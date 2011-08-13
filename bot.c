@@ -270,7 +270,7 @@ void  output_end_turn(Output* output) {
 void output_turn(Output *output, Game *game) {
   int index;
   Ant *ant;
-  for(index=0;index<=game->ant_tail;++index) {
+  for(index=0;index<game->ant_tail;++index) {
     ant = game->ants + index;
     if ( ant->player == 0 ) {
       output_move(output, ant);
@@ -280,7 +280,7 @@ void output_turn(Output *output, Game *game) {
 }
 
 void play_turn(Game *game) {
-  for(int index=0;index<=game->ant_tail;++index) {
+  for(int index=0;index<game->ant_tail;++index) {
     game->ants[index].move = NORTH;
   }
 }
@@ -294,5 +294,6 @@ int main(int argc, char **argv) {
   while ( parse_game_turn(input, game) ) {
     play_turn(game);
     output_turn(output, game);
+    initialize_turn(game);
   }
 }
